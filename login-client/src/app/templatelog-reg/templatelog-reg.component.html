@@ -1,0 +1,180 @@
+<body>
+  <div class="container container-fluid">
+    <div class="row row-no-gutters">
+        <div class="d-inline-block col-sm-4">
+            <div class="col p-4"><h2>Registration</h2></div>
+            {{ form.valid}}
+            {{ newUser.pwr}}
+            <!-- show all values as they input -->
+            {{ form.value | json}}
+              <form (submit)='onSubmit($event, form)' #form="ngForm">
+                  <div class="form-group row text-dark">
+                        <div class="col-sm-4 text-left">
+                            <label for="first_name" class="col-sm-20">First Name</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input 
+                              type="email" 
+                              name="first_name" 
+                              required
+                              minlength="3"
+                              maxlength="24"
+                              [(ngModel)]="newUser.first_name"
+                              [ngModelOptions]="{updateOn: 'blur'}"
+                              #first_name ="ngModel"
+                            >
+                              <div *ngIf="!first_name.valid && (first_name.dirty || first_name.touched)" class="text-errors"> Error, input valid value</div>
+                              <!-- <p class="error">{{ fname.errors | json }}</p> -->
+                        </div>
+                  </div>
+                  <div class="form-group row text-dark">
+                        <div class="col-sm-4 text-left">
+                            <label for="last_name" class="col-sm-20">Last Name</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="text" name="last_name" 
+                              required
+                              minlength="3"
+                              maxlength="24"
+                              [(ngModel)]="newUser.last_name"
+                              [ngModelOptions]="{updateOn: 'blur'}"
+                              #last_name = "ngModel"
+                            >
+                            <div *ngIf="!last_name.valid && (last_name.dirty || last_name.touched)" class="text-errors"> Error, input valid value</div>
+                        </div>
+                  </div>
+                  <div class="form-group row text-dark">
+                          <div class="col-sm-4 text-left">
+                              <label for="email" class="col-sm-20">Email</label>
+                          </div>
+                          <div class="col-sm-8">
+                              <input type="text" 
+                               name="email" 
+                               required
+                               minlength="3"
+                               maxlength="24"
+                               pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                               [(ngModel)]="newUser.email"
+                               [ngModelOptions]="{updateOn: 'blur'}"
+                               #email = "ngModel"
+                               >
+                               <div *ngIf="!email.valid && (email.dirty || email.touched)" class="text-errors"> Error, input valid value</div>
+                          </div>
+                  </div>
+                  <div class="form-group row text-dark">
+                          <div class="col-sm-4 text-left">
+                              <label for="password" class="col-sm-20">Password</label>
+                          </div>
+                          <div class="col-sm-8">
+                              <input type="text"
+                              name="password"
+                              required
+                              minlength="3"
+                              maxlength="24"
+                              [(ngModel)]="newUser.password"
+                              [ngModelOptions]="{updateOn: 'blur'}"
+                              #password = "ngModel"
+                              >
+                              <div *ngIf="!password.valid && (password.dirty || password.touched)" class="text-errors"> Error, input valid value</div>
+                          </div>
+                  </div>
+                  <div class="form-group row text-dark">
+                          <div class="col-sm-4 text-left">
+                              <label for="pwr" class="col-sm-20">Confirm Password</label>
+                          </div>
+                          <div class="col-sm-8">
+                              <input type="text" 
+                              name="pwr" placeholder="confirm pass"
+                              required
+                              minlength="3"
+                              maxlength="24"
+                              [pattern]="password.value"
+                              [(ngModel)]="newUser.pwr"
+                              [ngModelOptions]="{updateOn: 'blur'}"
+                              #pwr = "ngModel"
+                              >
+                              <div *ngIf="!pwr.valid && (pwr.dirty || pwr.touched)" class="text-errors"> Error, input valid value</div>
+                          </div>
+                  </div>
+                  <div class="form-group row text-right">
+                      <div class="col-sm-10 ">
+                          <button type="submit" *ngIf="!form.valid" disabled class="btn btn-success">Submit</button>
+                          <button type="submit" *ngIf="form.valid" class="btn btn-success">Submit</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+          <div class="d-inline-block col-sm-4"></div> 
+          <div class="d-inline-block col-sm-4">
+        <div class="col p-4"><h2>Login Here!</h2></div>
+        {{ formlogin.value | json}}
+              <form (submit)='onLogin($event, form)' #formlogin="ngForm">
+                  <div class="form-group row text-dark">
+                      <div class="col-sm-4 text-left">
+                          <label for="email" class="col-sm-20">Email</label>
+                      </div>
+                      <div class="col-sm-8">
+                          <input type="text" 
+                          name="email" placeholder="email"
+                          required
+                          minlength="3"
+                          maxlength="24"
+                          pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                          [(ngModel)]="loginData.email"
+                          [ngModelOptions]="{updateOn: 'blur'}"
+                          #emaillog = "ngModel"
+                          >
+                          <div *ngIf="!emaillog.valid && (emaillog.dirty || emaillog.touched)" class="text-errors"> Error, input valid value</div>
+                      </div>
+                  </div>
+                  <div class="form-group row text-dark">
+                      <div class="col-sm-4 text-left">
+                          <label for="password" class="col-sm-20">Password</label>
+                      </div>
+                      <div class="col-sm-8">
+                          <input type="text" 
+                          name="password" placeholder="Password" 
+                          required
+                          minlength="3"
+                          maxlength="24"
+                          [(ngModel)]="loginData.password"
+                          [ngModelOptions]="{updateOn: 'blur'}"
+                          #pwr2 = "ngModel"
+                          >
+                          <div *ngIf="!pwr2.valid && (pwr2.dirty || pwr2.touched)" class="text-errors"> Error, input valid value</div>
+                      </div>
+                  </div>
+                  <div class="form-group row text-right">
+                      <div class="col-sm-10 ">
+                        <button type="submit" *ngIf="!formlogin.valid" disabled class="btn btn-success" >Submit</button>
+                        <button type="submit" *ngIf="formlogin.valid" class="btn btn-success" [routerLink]="['/login/welcome']">Submit</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+  <div class="result">
+      <table class="table table-striped">
+          <thead class="thead-dark">
+              <tr>
+                  <th>User Id</th>
+                  <th> first Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Password</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let user of thisUser">
+                  <td>{{ user.pk }}</td>
+                  <td>{{ user.fields.first_name }}</td>
+                  <td>{{ user.fields.last_name }}</td>
+                  <td>{{ user.fields.email }}</td>
+                  <td>{{ user.fields.password }}</td>
+
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</body>
