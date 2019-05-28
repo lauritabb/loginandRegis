@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { TemplatelogRegComponent } from './templatelog-reg/templatelog-reg.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { DetailsComponent } from './details/details.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TemplatelogRegComponent,
     WelcomeComponent,
-    DetailsComponent
+    DetailsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

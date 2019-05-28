@@ -3,6 +3,7 @@ import { HttpService } from '../http.service';
 import { NgForm } from '@angular/forms';
 import { FormsModule }   from '@angular/forms';
 import { Users } from '../users';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-templatelog-reg',
@@ -26,7 +27,7 @@ export class TemplatelogRegComponent implements OnInit {
     password:'',
   }
 
-  constructor(private httpService:HttpService) { }
+  constructor(private httpService:HttpService, private router:Router) { }
 
   ngOnInit() {
     // if (!localStorage.getItem('user')){return }
@@ -45,6 +46,9 @@ export class TemplatelogRegComponent implements OnInit {
     //set new task to become value
     this.httpService.createUser(this.newUser).subscribe(userCreated =>{
       console.log(userCreated) 
+      localStorage.setItem('user', userCreated.id);
+      localStorage.setItem('name', userCreated.first_name);
+      this.router.navigateByUrl('/login/welcome')
     },
     error => {
       console.log(error);
@@ -54,6 +58,7 @@ export class TemplatelogRegComponent implements OnInit {
   }
 
   onLogin(event:Event, form: NgForm){
+    event.preventDefault();
     this.httpService.loginUser(this.loginData)
   }
   

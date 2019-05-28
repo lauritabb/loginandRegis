@@ -23,13 +23,17 @@ const routes: Routes = [
         path:'welcome', //localhost:4200/login/welcome
         component:WelcomeComponent
       },
+      // {
+      //   // one user id
+      //   path: ':user_id', //localhost:4200/login/4
+      //   component:DetailsComponent
+      //   // resolve:{
+      //   //   //get data before loading component
+      //   // }
+      // },
       {
-        // one user id
-        path: ':user_id', //localhost:4200/login/4
+        path: 'all',
         component:DetailsComponent
-        // resolve:{
-        //   //get data before loading component
-        // }
       }
     ]
   },

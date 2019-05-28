@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../http.service'; 
+
 
 @Component({
   selector: 'app-welcome',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
-
-  constructor() { }
+  person = localStorage.getItem('user');
+  namePerson = localStorage.getItem('name');
+  constructor(private _httpService: HttpService) { }
 
   ngOnInit() {
+    console.log(this.namePerson);
   }
+  
 
 }
